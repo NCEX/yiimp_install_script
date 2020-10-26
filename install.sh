@@ -264,8 +264,8 @@
     sudo apt -y install fail2ban
     sleep 5
     sudo systemctl status fail2ban | sed -n "1,3p"
-        fi
-
+    fi
+    sleep 5
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
     sudo apt -y install ufw
@@ -386,7 +386,7 @@
     
     # Copy Files (Blocknotify,iniparser,Stratum)
     cd $HOME/yiimp
-    sudo sed -i 's/AdminRights/'DirtyPanel'/' $HOME/yiimp/web/yaamp/modules/site/SiteController.php
+    sudo sed -i 's/myadmin/'DirtyPanel'/' $HOME/yiimp/web/yaamp/modules/site/SiteController.php
     sudo cp -r $HOME/yiimp/web /var/
     sudo mkdir -p /var/stratum
     cd $HOME/yiimp/stratum
@@ -1181,7 +1181,7 @@
     echo
     echo -e "$GREEN***************************$COL_RESET"
     echo -e "$GREEN Yiimp Install Script v0.3 $COL_RESET"
-    echo -e "$GREEN Finish !!! $COL_RESET"
+    echo -e "$GREEN Finish !!!                $COL_RESET"    
     echo -e "$GREEN***************************$COL_RESET"
     echo 
     echo
@@ -1190,7 +1190,7 @@
     echo -e "$RED Your mysql information is saved in ~/.my.cnf. $COL_RESET"
     echo
     echo -e "$RED Yiimp at : http://"$server_name" (https... if SSL enabled)"
-    echo -e "$RED Yiimp Admin at : http://"$server_name"/site/AdminPanel (https... if SSL enabled)"
+    echo -e "$RED Yiimp Admin at : http://"$server_name"/site/DirtyPanel (https... if SSL enabled)"
     echo -e "$RED Yiimp phpMyAdmin at : http://"$server_name"/phpmyadmin (https... if SSL enabled)"
     echo
     echo -e "$RED If you want change 'DirtyPanel' to access Panel Admin : Edit this file : /var/web/yaamp/modules/site/SiteController.php"
