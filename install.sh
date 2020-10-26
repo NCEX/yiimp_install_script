@@ -1204,7 +1204,9 @@
     echo
     echo
     echo -e "$RED***************************************************$COL_RESET"
-    echo -e "$RED YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION !!! $COL_RESET"
+    echo -e "$RED SYTEM REBOOT IN 15 SEC TO FINALIZE INSTALLATION !!! $COL_RESET"
     echo -e "$RED***************************************************$COL_RESET"
     echo
     echo
+    sleep 15
+    sudo reboot
