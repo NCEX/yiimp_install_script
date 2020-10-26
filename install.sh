@@ -59,10 +59,10 @@
     echo 
     sleep 3
         
-    hide_output sudo apt -y update 
-    hide_output sudo apt -y upgrade
-    hide_output sudo apt -y autoremove
-    apt_install dialog python3 python3-pip acl nano apt-transport-https
+    sudo apt -y update 
+    sudo apt -y upgrade
+    sudo apt -y autoremove
+    sudo apt install dialog python3 python3-pip acl nano apt-transport-https -y
     echo -e "$GREEN Done...$COL_RESET"
 
 
@@ -110,16 +110,16 @@
     
     if [ -f /usr/sbin/apache2 ]; then
     echo -e "Removing apache..."
-    hide_output apt-get -y purge apache2 apache2-*
-    hide_output apt-get -y --purge autoremove
+    apt-get -y purge apache2 apache2-*
+    apt-get -y --purge autoremove
     fi
 
-    apt_install nginx
-    hide_output sudo rm /etc/nginx/sites-enabled/default
-    hide_output sudo systemctl start nginx.service
-    hide_output sudo systemctl enable nginx.service
-    hide_output sudo systemctl start cron.service
-    hide_output sudo systemctl enable cron.service
+    sudo apt install nginx -y
+    sudo rm /etc/nginx/sites-enabled/default
+    sudo systemctl start nginx.service
+    sudo systemctl enable nginx.service
+    sudo systemctl start cron.service
+    sudo systemctl enable cron.service
     sleep 5
     sudo systemctl status nginx | sed -n "1,3p"
     echo
@@ -148,9 +148,9 @@
     # Create random password
     rootpasswd=$(openssl rand -base64 12)
     export DEBIAN_FRONTEND="noninteractive"
-    apt_install mariadb-server
-    hide_output sudo systemctl start mysql
-    hide_output sudo systemctl enable mysql
+    sudo apt install mariadb-server -y
+    sudo systemctl start mysql
+    sudo systemctl enable mysql
     sleep 5
     sudo systemctl status mysql | sed -n "1,3p"
     echo
@@ -165,25 +165,25 @@
     sleep 3
     
     source conf/pool.conf
-    if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
-    hide_output sudo add-apt-repository -y ppa:ondrej/php
-    fi
-    hide_output sudo apt -y update
+    
+    sudo add-apt-repository -y ppa:ondrej/php
+    
+    sudo apt -y update
 
     if [[ ("$DISTRO" == "16") ]]; then
-    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
     php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
     #hide_output sudo phpenmod mcrypt
     #hide_output sudo phpenmod mbstring
     else
-    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
     php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring \
     libpsl-dev libnghttp2-dev
     fi
     sleep 5
-    hide_output sudo systemctl start php7.3-fpm
+    sudo systemctl start php7.3-fpm
     sudo systemctl status php7.3-fpm | sed -n "1,3p"
     echo
     echo -e "$GREEN Done...$COL_RESET"
@@ -196,9 +196,9 @@
     echo
     sleep 3
     
-    apt_install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+    sudo apt -y install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
     librtmp-dev sendmail mutt screen git
-    apt_install pwgen -y
+    sudo apt -y install pwgen
     echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
@@ -210,14 +210,14 @@
     echo
     sleep 3
     
-    apt_install software-properties-common build-essential
-    apt_install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-    apt_install libminiupnpc10 libzmq5
-    apt_install libcanberra-gtk-module libqrencode-dev libzmq3-dev
-    apt_install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-    hide_output sudo apt -y update
-    apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+    sudo apt -y install software-properties-common build-essential
+    sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
+    sudo apt -y install libminiupnpc10 libzmq5
+    sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
+    sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+    sudo add-apt-repository -y ppa:bitcoin/bitcoin
+    sudo apt -y update
+    sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
        
     
@@ -260,14 +260,14 @@
     
     
     if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-    apt_install fail2ban
+    sudo apt -y install fail2ban
     sleep 5
     sudo systemctl status fail2ban | sed -n "1,3p"
         fi
 
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-    apt_install ufw
+    sudo apt -y install ufw
     hide_output sudo ufw default deny incoming
     hide_output sudo ufw default allow outgoing
     hide_output sudo ufw allow ssh
@@ -327,7 +327,7 @@
     hide_output sudo ufw allow 8463/tcp
     hide_output sudo ufw allow 8433/tcp
     hide_output sudo ufw allow 8533/tcp
-    hide_output sudo ufw --force enable
+    sudo ufw --force enable
     sleep 5
     sudo systemctl status ufw | sed -n "1,3p"   
     fi
@@ -350,7 +350,7 @@
     echo "phpmyadmin phpmyadmin/mysql/admin-pass password $rootpasswd" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
-    apt_install phpmyadmin
+    sudo apt -y install phpmyadmin
     echo -e "$GREEN Done...$COL_RESET"
 	
 	
@@ -359,7 +359,7 @@
     echo
     echo -e "$CYAN => Installing Yiimp $COL_RESET"
     echo
-    echo -e "Grabbing yiimp fron Github, building files and setting file structure."
+    echo -e "Grabbing yiimp from Github, building files and setting file structure."
     echo
     sleep 3
     
@@ -369,21 +369,21 @@
     
     # Compil Blocknotify
     cd ~
-    hide_output git clone https://github.com/Kudaraidee/yiimp
+    git clone https://github.com/Kudaraidee/yiimp
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
-    hide_output sudo make
+    sudo make
     
     # Compil iniparser
     cd $HOME/yiimp/stratum/iniparser
-    hide_output sudo make
+    sudo make
     
     # Compil Stratum
     cd $HOME/yiimp/stratum
     if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then
     sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
     fi
-    hide_output sudo make
+    sudo make
     
     # Copy Files (Blocknotify,iniparser,Stratum)
     cd $HOME/yiimp
@@ -527,8 +527,8 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
     	
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
@@ -539,7 +539,7 @@
     echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
     echo
     
-    apt_install letsencrypt
+    sudo apt -y install letsencrypt
     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name"
     sudo rm /etc/nginx/sites-available/$server_name.conf
     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
@@ -651,8 +651,8 @@
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 	fi
 	
-	hide_output sudo systemctl reload php7.3-fpm.service
-	hide_output sudo systemctl restart nginx.service
+	sudo systemctl reload php7.3-fpm.service
+	sudo systemctl restart nginx.service
 	echo -e "$GREEN Done...$COL_RESET"
 	
 	
@@ -737,8 +737,8 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
    
 	
@@ -988,7 +988,7 @@
     echo '
     <?php
 
-    ini_set('"'"'date.timezone'"'"', '"'"'CET'"'"');
+    ini_set('"'"'date.timezone'"'"', '"'"'UTC'"'"');
 
     define('"'"'YAAMP_LOGS'"'"', '"'"'/var/log/yiimp'"'"');
     define('"'"'YAAMP_HTDOCS'"'"', '"'"'/var/web'"'"');
