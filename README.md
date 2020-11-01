@@ -6,14 +6,14 @@ Discord : https://discord.gg/zcCXjkQ
 
 TUTO Youtube (16.04 / 18.04 - Without SSL) : https://www.youtube.com/watch?v=qE0rhfJ1g2k
 
-Kudaraidee Yiimp (used in this script for Yiimp Installation): https://github.com/Kudaraidee/yiimp
+Dirty Harry Yiimp (used in this script for Yiimp Installation): https://github.com/NCEX/yiimp
 
 Original Yiimp Installer : https://github.com/cryptopool-builders/multipool_original_yiimp_installer
 
 
 ***********************************
 
-## Install script for yiimp on Ubuntu Server 16.04 / 18.04 (use Kudaraidee's Yiimp)
+## Install script for yiimp on Ubuntu Server 16.04 / 18.04 (use Dirty Harry's Yiimp)
 
 USE THIS SCRIPT ON FRESH INSTALL UBUNTU Server 16.04 / 18.04 !
 
@@ -25,25 +25,25 @@ Connect on your VPS =>
 - adduser pool sudo
 - su - pool
 - sudo apt -y install git
-- git clone https://github.com/NCEX/yiimp_install_scrypt.git
-- cd yiimp_install_scrypt/
+- git clone https://github.com/NCEX/yiimp_install_script.git
+- cd yiimp_install_script/
 - bash install.sh (DO NOT RUN THE SCRIPT AS ROOT or SUDO)
-- At the end, you MUST REBOOT to finalize installation...
+- At the end, the script REBOOT AUTO to finalize installation...
 
 Finish !
 - Go http://xxx.xxx.xxx.xxx or https://xxx.xxx.xxx.xxx (if you have chosen LetsEncrypt SSL). Enjoy !
-- Go http://xxx.xxx.xxx.xxx/AdminPanel or https://xxx.xxx.xxx.xxx/AdminPanel to access Panel Admin
+- Go http://xxx.xxx.xxx.xxx/PoolPortal or https://xxx.xxx.xxx.xxx/PoolPortal to access the Admin Panel.
 
-If you are issue after installation (nginx,mariadb... not found), use this script : bash install-debug.sh (watch the log during installation)
+If you are issue after installation (nginx,mariadb... not found), use this script : (watch the log during installation)
 
 
-###### :bangbang: **YOU MUST UPDATE THE FOLLOWING FILES :**
+###### :booom: **YOU MUST UPDATE THE FOLLOWING FILES :**
 - **/var/web/serverconfig.php :** update this file to include your public ip (line = YAAMP_ADMIN_IP) to access the admin panel (Put your PERSONNAL IP, NOT IP of your VPS). update with public keys from exchanges. update with other information specific to your server..
 - **/etc/yiimp/keys.php :** update with secrect keys from the exchanges (not mandatory)
-- **If you want change 'AdminPanel' to access Panel Admin :** Edit this file "/var/web/yaamp/modules/site/SiteController.php" and Line 11 => change 'DirtyPanel'
+- **If you want change 'PoolPortal' to access the Admin Panel :** Edit this file "/var/web/yaamp/modules/site/SiteController.php" and Line 11 => change 'PoolPortal'
 
 
-###### :bangbang: **IMPORTANT** : 
+###### :booom: **IMPORTANT** : 
 
 - The configuration of yiimp and coin require a minimum of knowledge in linux
 - Your mysql information (login/Password) is saved in **~/.my.cnf**
